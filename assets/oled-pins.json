@@ -1,0 +1,4 @@
+{
+  "J1": {"1": "GND", "2": "+3V3", "3": "OLED_SCL", "4": "OLED_SDA"},
+  "U1": {"1": "LED_RED_CTL", "2": "LED_YELLOW_CTL", "3": "LED_GREEN_CTL", "5": "OLED_SDA", "6": "OLED_SCL", "21": "+3V3", "22": "GND"}
+}

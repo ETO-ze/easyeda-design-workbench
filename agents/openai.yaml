@@ -1,0 +1,4 @@
+interface:
+  display_name: "嘉立创 EDA 设计工作台"
+  short_description: "探测嘉立创专业版，生成电路草案，分开核对接口、安装孔和实际铜层"
+  default_prompt: "用 $easyeda-design-workbench 检测当前环境，告诉我这块板能自动做到哪一步，并先核对接口和安装约束。"

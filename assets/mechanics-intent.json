@@ -1,0 +1,11 @@
+{
+  "description": "Synthetic inspection example, not a production drawing. Datum A is the intersection of the left and bottom straight board edges, viewed from the top. Insertion is the plug motion toward J1.",
+  "unit": "mm",
+  "frame": {"origin": "board-edge-intersection-A", "view": "top", "x_positive": "right", "y_positive": "up"},
+  "tolerance": {"center": 0.10, "drill": 0.05},
+  "holes": {
+    "MH1": {"center": [2.54, 5.08], "drill": 3.175},
+    "MH2": {"center": [30.48, 12.70], "drill": 3.175}
+  },
+  "interfaces": {"J1": {"side": "top", "insertion": "+x"}}
+}

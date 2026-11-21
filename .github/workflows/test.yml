@@ -1,0 +1,32 @@
+name: Workbench checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  unit:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -B -m unittest discover -s tests -v
+      - run: python scripts/workbench.py mechanics assets/mechanics-intent.json assets/mechanics-measured.json
+  offline-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/install_tools.py --tools-dir .integration-tools --tools eprj3 copper --apply
+      - run: python -m pip install "shapely>=2,<3"
+      - run: python scripts/workbench.py --tools-dir .integration-tools draft blink-draft
+      - run: python -m unittest discover -s .integration-tools/easyeda-pcb-design-bc3c736/tests -v
+      - run: python .integration-tools/easyeda-pcb-design-bc3c736/scripts/run_copper_benchmarks.py --out-dir copper-cases

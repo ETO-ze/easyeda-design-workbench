@@ -1,0 +1,10 @@
+{
+  "description": "Synthetic measurement of the example board in mils. Values are illustrative, not independent evidence about real hardware.",
+  "unit": "mil",
+  "frame": {"origin": "board-edge-intersection-A", "view": "top", "x_positive": "right", "y_positive": "up"},
+  "holes": {
+    "MH1": {"center": [100, 200], "drill": 125},
+    "MH2": {"center": [1202, 499], "drill": 126}
+  },
+  "interfaces": {"J1": {"side": "top", "insertion": "+x"}}
+}
