@@ -1,13 +1,13 @@
 ---
 name: easyeda-design-workbench
-description: 在嘉立创EDA专业版中按需求设计和验收电路，整合现有工程的 API Gateway 操作、新原理图与 PCB 初排、引脚网络核对、布局布线及投板前检查。适用于跨阶段任务、评估当前环境能做到哪一步、用历史工程验证设计规则。
+description: 用于嘉立创 EDA 专业版（EasyEDA Pro）原理图、PCB 初排与布线、API Gateway 操作、引脚或投板检查，以及板壳装配中元件 3D 模型缺失、USB 开口错位、外壳层或导出 STL 尺寸异常等任务。
 ---
 
 # 嘉立创电路设计工作台
 
 先判断用户想要的交付物：原理图草案、现板修改、指定网络核对、布线或可下单文件。选择与任务有关的入口。以下 PowerShell 命令的工作目录可以是用户的工程目录。
 
-从本技能目录执行 `python scripts/workbench.py doctor`（Windows 也可用 `py`）。它只读本机工具清单和回环网关，不启动编辑器，也不选择或保存文档。以下示例按默认工具目录书写；设置了 `CODEX_HOME` 时请使用该根目录。没有编辑器也可以做引脚与结构比对；安装可选的固定依赖见 [README](README.md)。不要根据依赖在盘推断编辑器动作已通过。
+准备连接桌面或评估在线能力时，从本技能目录执行 `python scripts/workbench.py doctor`（Windows 也可用 `py`）。它只读本机工具清单和回环网关，不启动编辑器，也不选择或保存文档。若只复查已导出的焊盘、结构尺寸或壳体 STL，直接用对应离线命令，无需运行 `doctor` 或开启 Gateway。以下示例按默认工具目录书写；设置了 `CODEX_HOME` 时请使用该根目录。安装可选的固定依赖见 [README](README.md)。不要根据依赖在盘推断编辑器动作已通过。
 
 ## 已有工程，走编辑器
 
@@ -63,5 +63,9 @@ py "$workbench/scripts/check_pcb_pins.py" ".\board-backup.zip" "$workbench/asset
 
 - `python scripts/workbench.py mechanics intent.json measured.json`：意图来自结构图，实测值来自明确面别与原点的 PCB 测量或导出。用位号核对每个孔的坐标、钻孔直径和连接器朝向；样例在 `assets/mechanics-*.json`。不接受单位不明的数据，不推算“也许镜像以后能装”。它不是 PCB 轮廓提取器或 3D 干涉检查器。
 - `python scripts/workbench.py copper fab.zip pads.json --out copper-report.json`：对**已经导出**的受支持双层 Gerber 检查实铜和跨层连接。独立期望的物理焊盘 JSON 格式见工具目录的 `easyeda-pcb-design-bc3c736/references/copper-tool.md`。只凭网名或只看 3D 预览，不能替代本步。报告文件使用新路径。
+
+## 整机装配、元件 3D 和外壳
+
+当用户要看装配好的元件层、外壳层，或报告“有料号但看不到模型”“导出只有柱子”“成品大了一圈”时，先读[原生装配与导出验收](references/native-assembly.md)。区分生产 PCB 和不投板的装配页；分别报告元件存在、关键部位保真、壳体几何、实物试装的结果。若要用真实导出的两件壳 STL 复跑外廓检查，见 [StopKey：4.2 寸屏、面板键和 USB-C](references/stopkey-r1.md)。`shell-size` 只比较同基准 STL 的外包络，不能证明开孔、布线净空或可打印。
 
 选择可选工具或升级 V4 环境时读 [工具与版本](references/toolchain.md)。交付时说清已经生成什么、由哪个工具检查、哪些步骤仍需编辑器或实物。

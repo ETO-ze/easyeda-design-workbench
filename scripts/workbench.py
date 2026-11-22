@@ -13,6 +13,14 @@ ENGINE = "eprj3-v1.36.1"
 COPPER = "easyeda-pcb-design-bc3c736"
 
 
+def add_shell_size_options(parser):
+    parser.add_argument("parts", type=Path, nargs="+", help="ASCII/binary shell STLs in the same assembled frame")
+    parser.add_argument("--unit", choices=("mm",), required=True, help="declare STL coordinate units")
+    parser.add_argument("--expected-mm", nargs=3, metavar=("X", "Y", "Z"), required=True,
+                        help="positive target outer spans on the export axes")
+    parser.add_argument("--tolerance-mm", required=True, help="absolute, inclusive per-axis tolerance")
+
+
 def run(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     root = Path(os.environ.get("CODEX_HOME") or (Path.home() / ".codex"))
@@ -33,6 +41,8 @@ def run(argv=None):
     mech = sub.add_parser("mechanics", help="compare measured mechanical features against intent")
     mech.add_argument("intent", type=Path)
     mech.add_argument("measured", type=Path)
+    shell = sub.add_parser("shell-size", help="check the assembled outer envelope of native shell STLs")
+    add_shell_size_options(shell)
     cop = sub.add_parser("copper", help="test supported two-layer Gerber copper with independent expected pads")
     cop.add_argument("fab", type=Path)
     cop.add_argument("expected", type=Path)
@@ -50,6 +60,9 @@ def run(argv=None):
         cmd = py + [HERE / "check_pcb_pins.py", args.source, args.contract, "--pcb", args.pcb]
     elif args.action == "mechanics":
         cmd = py + [HERE / "check_mechanics.py", args.intent, args.measured]
+    elif args.action == "shell-size":
+        cmd = py + [HERE / "check_shell_size.py", "--unit", args.unit, "--expected-mm", *args.expected_mm,
+                    "--tolerance-mm", args.tolerance_mm, "--", *args.parts]
     elif args.action == "draft":
         engine = tools / ENGINE
         script = engine / "scripts/make-board.js"

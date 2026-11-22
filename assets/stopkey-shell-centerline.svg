@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc" lang="zh-CN">
+  <title id="title">止键样品外壳：向内偏移壁中心线，孔位不动</title>
+  <desc id="desc">尺寸单位为毫米，示意非等比。壁厚 2.20，沿中心线对称生成，每侧为 1.10。原 160 × 92 的中心线生成了 162.2 × 94.2 的外廓。固定基准和孔位，只把壳壁中心线每边向内偏移 1.10，得到 157.8 × 89.8 的中心线，修正外廓为 160 × 92。左图示意俯视轮廓，右图比较同一侧壁修改前后的剖面。</desc>
+  <defs>
+    <pattern id="wall" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#d9efed"/>
+      <path d="M-2 2L2-2M0 10L10 0M8 12L12 8" stroke="#91c7c2" stroke-width="1.3"/>
+    </pattern>
+    <g id="hole" fill="none" stroke="#293e52">
+      <circle r="9" fill="#fff" stroke-width="2.6"/>
+      <path d="M-15 0H15M0-15V15" stroke-width="1.3"/>
+    </g>
+    <style>
+      text{font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;fill:#182f41}
+      .title{font-size:38px;font-weight:700}.sub{font-size:21px;fill:#425768}
+      .head{font-size:25px;font-weight:700}.body{font-size:20px}.small{font-size:18px;fill:#425768}
+      .measure{font-size:19px;font-weight:700;fill:#214454}
+      .old{fill:none;stroke:#ac5527;stroke-width:3;stroke-dasharray:9 6}
+      .target{fill:none;stroke:#00746d;stroke-width:4}
+      .center{fill:none;stroke:#435ea5;stroke-width:3;stroke-dasharray:12 4 2 4}
+      .dim{fill:none;stroke:#536976;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#f4f7f8"/>
+  <path d="M43 32H91" stroke="#00746d" stroke-width="6"/>
+  <text x="43" y="80" class="title">外壳尺寸修正：只偏移壁中心线</text>
+  <text x="44" y="119" class="sub">适用条件：目标尺寸指成品外廓，且壳壁由中心线向两侧等厚生成。</text>
+  <rect x="995" y="43" width="241" height="43" rx="7" fill="#e3ecee"/>
+  <text x="1115" y="71" class="small" text-anchor="middle">单位 mm · 示意非等比</text>
+
+  <rect x="42" y="148" width="582" height="462" rx="12" fill="#fff" stroke="#cad6db"/>
+  <text x="67" y="190" class="head">01　俯视：基准和孔位保持不变</text>
+  <text x="67" y="224" class="small">轮廓之间的间距已放大，以便区分线型。</text>
+  <rect x="105" y="258" width="455" height="171" rx="20" class="old"/>
+  <rect x="116" y="269" width="433" height="149" rx="15" class="target"/>
+  <rect x="127" y="280" width="411" height="127" rx="10" class="center"/>
+  <g aria-label="位置保持不变的示意安装孔">
+    <use href="#hole" x="156" y="305"/><use href="#hole" x="509" y="305"/>
+    <use href="#hole" x="156" y="382"/><use href="#hole" x="509" y="382"/>
+  </g>
+  <text x="333" y="343" text-anchor="middle" class="body" font-weight="700">孔中心坐标不变</text>
+  <text x="333" y="371" text-anchor="middle" class="small">不缩放整壳或整机</text>
+  <path d="M76 469H135" class="old"/>
+  <text x="151" y="476" class="body">旧外廓　162.2 × 94.2</text>
+  <path d="M76 516H135" class="target"/>
+  <text x="151" y="523" class="body">目标外廓　160 × 92</text>
+  <path d="M76 563H135" class="center"/>
+  <text x="151" y="570" class="body">修正后中心线　157.8 × 89.8</text>
+
+  <rect x="646" y="148" width="590" height="462" rx="12" fill="#fff" stroke="#cad6db"/>
+  <text x="671" y="190" class="head">02　局部剖面：同一侧壁的两个状态</text>
+  <text x="671" y="224" class="small">左为壳内，右为壳外；两行沿同一基准对齐。</text>
+  <text x="671" y="311" class="body" font-weight="700">原状</text>
+  <text x="671" y="384" class="body" font-weight="700">修正</text>
+  <rect x="907" y="284" width="210" height="40" fill="#f8e9dd" stroke="#c18b6a"/>
+  <rect x="802" y="357" width="210" height="40" fill="url(#wall)" stroke="#4d9691"/>
+  <path d="M1117 261V405" class="old"/>
+  <path d="M1012 261V405" class="target"/>
+  <path d="M907 261V405" class="center"/>
+  <path d="M802 403V469M907 407V440M1012 407V469" class="dim"/>
+  <path d="M802 426H1012M797 431L807 421M902 431L912 421M1007 431L1017 421" class="dim"/>
+  <text x="854" y="420" text-anchor="middle" class="measure">1.10</text>
+  <text x="960" y="420" text-anchor="middle" class="measure">1.10</text>
+  <path d="M802 463H1012M797 468L807 458M1007 468L1017 458" class="dim"/>
+  <rect x="846" y="449" width="122" height="27" fill="#fff"/>
+  <text x="907" y="470" text-anchor="middle" class="measure">壁厚 2.20</text>
+  <path d="M1011 345H915" fill="none" stroke="#435ea5" stroke-width="2.5"/>
+  <path d="M923 339L913 345L923 351" fill="none" stroke="#435ea5" stroke-width="2.5"/>
+  <text x="671" y="520" class="body">绿色实线既是原中心线，也是目标外壁面。</text>
+  <text x="671" y="559" class="body">将中心线向壳内移 1.10，壁厚仍为 2.20。</text>
+
+  <rect x="42" y="634" width="1194" height="91" rx="10" fill="#143848"/>
+  <text x="68" y="673" font-size="24" font-weight="700" style="fill:#fff">复核</text>
+  <text x="158" y="673" font-size="23" style="fill:#fff">外宽 = 157.8 + 2 × 1.10 = 160</text>
+  <text x="688" y="673" font-size="23" style="fill:#fff">外高 = 89.8 + 2 × 1.10 = 92</text>
+  <text x="158" y="706" font-size="18" style="fill:#d6e7ec">重开导出文件，实测外廓、壁厚，并核对安装孔中心坐标。</text>
+</svg>

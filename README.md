@@ -4,6 +4,8 @@
 
 本项目由社区维护，不是嘉立创官方产品。不捆绑桌面客户端，不要求上传工程，也不把旧版专业版自动升级为 V4。适配器和版本选择见[选型与兼容性](references/toolchain.md)。
 
+**整机案例：[StopKey R1：4.2 英寸墨水屏、USB-C 与面板键](references/stopkey-r1.md)。** 在嘉立创里有外壳对象，为什么导出来却只有螺丝柱？为什么把边框画成 160 × 92 mm，导出却变成 162.2 × 94.2？案例附修正示意图、两件真实原生 STL 和可在本机重跑的尺寸检查。要把方法用到自己的工程，读[模型绑定、生产板与装配页分离、开孔验收](references/native-assembly.md)。
+
 ## 从哪里开始
 
 有 Python 3.10+ 即可运行环境自检、焊盘网名和安装孔检查。Windows 中可把以下 `python` 换成 `py`。要在 Codex 中以 skill 使用，将本仓库克隆到自己的技能目录，默认是 `~/.codex/skills/easyeda-design-workbench`（PowerShell 示例）；也可以克隆到普通目录，直接使用命令行。
@@ -42,6 +44,7 @@ python scripts/workbench.py draft blink-draft
 | 核对显示屏、LED 等接口接线定义 | `pins backup.zip assets/oled-pins.json --pcb PCB1` | 读取旧版 EPRU 备份，用位号及**物理焊盘号**报出预期和实际网名；不会把 GPIO 编号当成焊盘号。 |
 | 查安装孔偏移、孔径差 39.37 倍、USB 装反 | `mechanics intent.json measured.json` | 统一 mm/mil，给出每个孔的中心/孔径误差，并检查接口面别和插入方向。需从结构图和 PCB 分别取得输入；不代替 3D 干涉检查。 |
 | 查实际铜层上的断路、短路、孔型问题 | `copper fab.zip pads.json --out copper-report.json` | 独立预期焊盘与受支持双层 Gerber/PTH/NPTH 是否一致。多层或不支持的文件不能算通过。 |
+| 查两片壳合上后外廓是否正确 | `shell-size rear.stl front.stl --unit mm --expected-mm 160 92 33.2 --tolerance-mm 0.01` | 按导出时的坐标合并 STL 的轴向边界，逐轴比较；不会自动对齐布局，也不检查壁面和开口。数值只适用于本例。 |
 
 对于 `pins`、`mechanics` 和 `copper`，退出码 **0** = 所声明范围通过，**1** = 有实际差异，**2** = 输入不足或不支持。`doctor` 是能力清单，应查看 JSON 内的状态。安装孔样例是合成的；OLED 引脚表只是格式示例，套用前须核实器件的具体封装版本。
 
@@ -53,7 +56,7 @@ python scripts/workbench.py draft blink-draft
 | 焊盘分配 | 在一个旧版导出样本上核对 11 个指定焊盘；错误网名的反例可复现。仓库测试使用合成数据，不发布原始工程。 |
 | 机械验收 | 包含等值 mm/mil、误把数字当 mil、镜像、参考系不一致、连接器面别与插入方向等正反例。 |
 | 上游铜层检查 | 26 项上游单测通过；10 个 Gerber 正反例中，3 个通过、7 个检出预设缺陷。仅覆盖受支持的双层贯穿孔模型。 |
-| 真实在线编辑 | 本次在专业版 3.2.91 探测到桥，但无连接窗口；未宣称在此版本实测了写板、客户端 ERC/DRC 或制造导出。 |
+| 真实在线编辑与装配 | 初次环境探测只有桥、没有连接窗口；后续独立的 StopKey R1 工程在专业版 3.2.91 完成文档回读、9 网核对、生产 PCB 的严格 DRC 与原生 OBJ/STL 导出。7 个板上件及 2 个板外件有实际网格；精细形状仍有简化。见[逐项结果与未验证项](references/stopkey-r1.md)。 |
 
 ```sh
 python -B -m unittest discover -s tests -v
